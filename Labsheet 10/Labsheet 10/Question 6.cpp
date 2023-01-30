@@ -14,39 +14,49 @@ void displayPlayers();
 void displayReversePlayers();
 void findHighestHealth();
 void findLowestHealth();
-int findAllHealthValues();
+void findAllHealthValues(int t_healthValue);
 
 int main()
 {	
 	initializeArrays();
-	{
-		int HealthValue = 0;
+	
+
+		int healthValue = 0;
+		int allHealthValues = 0;
 		int indexPosition = 0;
 		std::cout << "Enter a health value: ";
-		std::cin >> HealthValue;
-		indexPosition = findFirstHealthValue(HealthValue);
+		std::cin >> healthValue;
+		indexPosition = findFirstHealthValue(healthValue);
 		if (indexPosition == -1)
 		{
 			std::cout << "Health Value not found \n";
 		}
 		else
 		{
-			std::cout << "Health value " << HealthValue << " was found first at index position: " << indexPosition << "\n";
-	}   }
+			std::cout << "Health value " << healthValue << " was found first at index position: " << indexPosition << "\n";
+	    }
+		
+		std::cout << "Enter a health value: ";
+		std::cin >> allHealthValues;
+		findAllHealthValues(allHealthValues);
+
+
+
+
 	
-	int findAllHealthValues();
+	//int findAllHealthValues();
 	int sum = 0;
 	float average = 0;
 	
 	sum = calculateSum();
 	average = calculateAvg(sum);
-	std::cout << "The sum of the players health is: " << sum << "\n";
-	std::cout << "The average of the players health is: " << average << "\n";
+	//std::cout << "The sum of the players health is: " << sum << "\n";
+	//std::cout << "The average of the players health is: " << average << "\n";
 
-	displayPlayers();
-	displayReversePlayers();
-	findHighestHealth();
-	findLowestHealth();
+	//displayPlayers();
+	//displayReversePlayers();
+	//findHighestHealth();
+	//findLowestHealth();
 	return 0;
 }
 
@@ -181,25 +191,20 @@ int findFirstHealthValue(int t_firstHealthValue)
 		return ii;
 }
 //ddddddddddddddddddddd
-int  findAllHealthValues()
+void  findAllHealthValues(int t_healthValue)
 {
-	int ii = 0;
-		for(int i = 0; i < MAX_PLAYERS; i++)
+	for (int i = 0; i < MAX_PLAYERS; i++)
+	{
+		healthArray[i];
+
+		if(healthArray[i] == t_healthValue)
 		{
-			healthArray[i];
-
-			if(healthArray[i])
-			{
-				ii = i;
-				break;
-			}
-			else
-			{
-				ii = -1;
-			}
+			std::cout << "Player " << namesArray[i] << " has a health value of: " << t_healthValue << std::endl;
 		}
+			
+	}
 
-		return ii;
+		
 
 
 }
