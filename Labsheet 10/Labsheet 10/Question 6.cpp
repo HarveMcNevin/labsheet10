@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 //GLOBAL variables 
 const int MAX_PLAYERS = 8;
@@ -7,20 +8,22 @@ int healthArray[MAX_PLAYERS];
 
 //Functions
 int calculateSum();
-int findFirstHealthValue(int t_firstHealthValue);
 float calculateAvg(int t_sum);
 void initializeArrays();
 void displayPlayers();
 void displayReversePlayers();
 void findHighestHealth();
-void findLowestHealth();
-void findAllHealthValues(int t_healthValue);
+void findLowestHealth(); 
+int findFirstHealthValue(int t_firstHealthValue);//question 7
+void findAllHealthValues(int t_healthValue);//question 8
+int findLastName(std::string t_aName); // question 9
 
 int main()
 {	
 	initializeArrays();
 	
-
+		std::string aName = "";
+		int nameIndexPosition = 0;
 		int healthValue = 0;
 		int allHealthValues = 0;
 		int indexPosition = 0;
@@ -35,13 +38,22 @@ int main()
 		{
 			std::cout << "Health value " << healthValue << " was found first at index position: " << indexPosition << "\n";
 	    }
-		
+		////////////////////////////////////////////////////////////
 		std::cout << "Enter a health value: ";
 		std::cin >> allHealthValues;
 		findAllHealthValues(allHealthValues);
-
-
-
+		////////////////////////////////////////////////////////////
+		std::cout << "Enter a name: ";
+		std::cin >> aName;
+		nameIndexPosition = findLastName(aName);
+		if(nameIndexPosition == -1)
+		{
+			std::cout << "Name was not found in the array.\n";
+		}
+		else
+		{
+			std::cout << "Name value " << aName << " was found last at index position: " << nameIndexPosition << "\n";
+		}
 
 	
 	//int findAllHealthValues();
@@ -190,9 +202,11 @@ int findFirstHealthValue(int t_firstHealthValue)
 
 		return ii;
 }
-//ddddddddddddddddddddd
+//This function finds every instance of a given value and displays each coresponding name
 void  findAllHealthValues(int t_healthValue)
 {
+	int t = 0;
+
 	for (int i = 0; i < MAX_PLAYERS; i++)
 	{
 		healthArray[i];
@@ -201,11 +215,29 @@ void  findAllHealthValues(int t_healthValue)
 		{
 			std::cout << "Player " << namesArray[i] << " has a health value of: " << t_healthValue << std::endl;
 		}
-			
+		else
+		{
+			t++;
+		}
 	}
+	if(t == MAX_PLAYERS)
+	{
+		std::cout << "Health Value not found in the array. \n";
+	}
+}
 
-		
+int findLastName(std::string t_aName)
+{
+	for (int i = MAX_PLAYERS - 1; i >= 0; i--)
+	{
+		namesArray[i];
 
-
+		if (namesArray[i] == t_aName)
+		{
+			return i;
+			break;
+		}
+	}
+	return -1;
 }
 
