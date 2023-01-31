@@ -17,12 +17,19 @@ void findLowestHealth();
 int findFirstHealthValue(int t_firstHealthValue);//question 7
 void findAllHealthValues(int t_healthValue);//question 8
 int findLastName(std::string t_aName); // question 9
+int insertPlayerAtEnd(std::string t_aName, int t_newHealth);// question 10
+int deleteLastPlayer();
 
 int main()
 {	
+
 	initializeArrays();
-	
-		std::string aName = "";
+	int playerAtEnd = 0;
+	int deletedPlayer = 0;
+	std::string newName = "";
+	int newHealthValue = 0;
+	int newIndexPosition = 0;
+	std::string aName = "";
 		int nameIndexPosition = 0;
 		int healthValue = 0;
 		int allHealthValues = 0;
@@ -54,7 +61,18 @@ int main()
 		{
 			std::cout << "Name value " << aName << " was found last at index position: " << nameIndexPosition << "\n";
 		}
+		////////////////////////
+		deletedPlayer = deleteLastPlayer();
+		std::cout << "The player at index position " << deletedPlayer << " was deleted.\n";
 
+		////////////////////////////////////////////////////////////
+		std::cout << "Enter a new Name value: ";
+		std::cin >> newName;
+		std::cout << "Enter a new Health value: ";
+		std::cin >> newHealthValue;
+		playerAtEnd = insertPlayerAtEnd(newName, newHealthValue);
+
+		std::cout << "Player " << newName << " was inserted at index position " << playerAtEnd << "\n";
 	
 	//int findAllHealthValues();
 	int sum = 0;
@@ -239,5 +257,19 @@ int findLastName(std::string t_aName)
 		}
 	}
 	return -1;
+}
+
+int deleteLastPlayer()
+{
+	healthArray[MAX_PLAYERS - 1] = 0;
+	namesArray[MAX_PLAYERS - 1] = "";
+	return MAX_PLAYERS - 1;
+}
+//////////
+int insertPlayerAtEnd(std::string t_aName, int t_newHealth)
+{
+	healthArray[MAX_PLAYERS - 1] = t_newHealth;
+	namesArray[MAX_PLAYERS - 1] = t_aName;
+	return MAX_PLAYERS - 1;
 }
 
