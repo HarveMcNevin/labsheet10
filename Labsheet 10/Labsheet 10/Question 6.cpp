@@ -3,6 +3,7 @@
 
 //GLOBAL variables 
 const int MAX_PLAYERS = 8;
+int noOfPlayers = 8;
 std::string namesArray[MAX_PLAYERS]{};
 int healthArray[MAX_PLAYERS];
 
@@ -33,7 +34,7 @@ int main()
 	int newHealthValue = 0;
 	int newIndexPosition = 0;
 	std::string aName = "";
-		int nameIndexPosition = 0;
+	int nameIndexPosition = 0;
 		int healthValue = 0;
 		int allHealthValues = 0;
 		int indexPosition = 0;
@@ -80,10 +81,7 @@ int main()
 		/////////////////////////////////////////
 
 		std::cout << "Select a Player's name (case sensitive): \n";
-		for (int i = 0; i < MAX_PLAYERS; i++)
-		{
-			std::cout << namesArray[i] << "\n";
-		}
+		displayPlayers();
 		std::cin >> stringName;
 		newNameIndex = changePlayerHealth(stringName);
 
@@ -140,7 +138,7 @@ healthArray[7] = 6;
 int calculateSum()
 {
 	int sum = 0;
-	for(int i = 0; i < MAX_PLAYERS; i++)
+	for(int i = 0; i < noOfPlayers; i++)
 	{
 		sum = sum + healthArray[i];
 	}
@@ -152,22 +150,17 @@ int calculateSum()
 //This function calculates the average of the health array
 float calculateAvg(int t_sum)
 {
-
 	float average = 0;
-	average = t_sum / (float) (MAX_PLAYERS);
+	average = t_sum / (float) (noOfPlayers);
 	return average;
-	
-
 }
 
 //This function displays each player and their respective health value
 void displayPlayers()
 {
-	for(int i = 0; i < MAX_PLAYERS; i++)
+	for(int i = 0; i < noOfPlayers; i++)
 	{
-	
 		std::cout << namesArray[i] << " has a health of: " << healthArray[i] << std::endl;
-
 	}
 	std::cout << "\n";
 }
@@ -176,7 +169,7 @@ void displayPlayers()
 void displayReversePlayers()
 {
 
-	for(int i = MAX_PLAYERS - 1; i >= 0; i--)
+	for(int i = noOfPlayers - 1; i >= 0; i--)
 	{
 	
 		std::cout << namesArray[i] << " has a health of: " << healthArray[i] << std::endl;
@@ -188,7 +181,7 @@ void findHighestHealth()
 {
 	int highest = 0;
 	std::string highestPlayer = "";
-	for(int i = 0; i < MAX_PLAYERS; i++)
+	for(int i = 0; i < noOfPlayers; i++)
 	{
 	
 		if(healthArray[i] > highest)
@@ -206,9 +199,9 @@ void findLowestHealth()
 
 	int lowest = 0;
 
-	for (int i = 0; i < MAX_PLAYERS; i++)
+	for (int i = 0; i < noOfPlayers; i++)
 	{
-		if(i == 0)
+		if(i == 0) //
 		{
 			lowest = healthArray[i];
 		}
@@ -225,9 +218,9 @@ void findLowestHealth()
 int findFirstHealthValue(int t_firstHealthValue)
 {
 	int ii = 0;
-		for(int i = 0; i < MAX_PLAYERS; i++)
+		for(int i = 0; i < noOfPlayers; i++)
 		{
-			healthArray[i];
+
 
 			if(healthArray[i] == t_firstHealthValue)
 			{
@@ -247,9 +240,8 @@ void  findAllHealthValues(int t_healthValue)
 {
 	int t = 0;
 
-	for (int i = 0; i < MAX_PLAYERS; i++)
+	for (int i = 0; i < noOfPlayers; i++)
 	{
-		healthArray[i];
 
 		if(healthArray[i] == t_healthValue)
 		{
@@ -260,7 +252,7 @@ void  findAllHealthValues(int t_healthValue)
 			t++;
 		}
 	}
-	if(t == MAX_PLAYERS)
+	if(t == noOfPlayers)
 	{
 		std::cout << "Health Value not found in the array. \n";
 	}
@@ -268,48 +260,55 @@ void  findAllHealthValues(int t_healthValue)
 
 int findLastName(std::string t_aName)
 {
-	for (int i = MAX_PLAYERS - 1; i >= 0; i--)
-	{
-		namesArray[i];
+	int i = noOfPlayers - 1;
+	bool found = false;
 
+	for (; i >= 0; i--)
+	{
 		if (namesArray[i] == t_aName)
 		{
-			return i;
+			found = true;
 			break;
 		}
-	}
-	return -1;
-}
 
+	}
+	if(found == false)
+	{
+		i = -1;
+	}
+	return i;
+}
+//This function deletes the last player in the array
 int deleteLastPlayer()
 {
-	healthArray[MAX_PLAYERS - 1] = 0;
-	namesArray[MAX_PLAYERS - 1] = "";
-	return MAX_PLAYERS - 1;
+	healthArray[noOfPlayers - 1] = 0;
+	namesArray[noOfPlayers - 1] = "";
+	return noOfPlayers - 1;
 }
-
-//////////
+//This function 
 int insertPlayerAtEnd(std::string t_aName, int t_newHealth)
 {
-	healthArray[MAX_PLAYERS - 1] = t_newHealth;
-	namesArray[MAX_PLAYERS - 1] = t_aName;
-	return MAX_PLAYERS - 1;
+	healthArray[noOfPlayers - 1] = t_newHealth;
+	namesArray[noOfPlayers - 1] = t_aName;
+	return noOfPlayers - 1;
 }
 
 int changePlayerHealth(std::string t_aNewName)
 {
-	for (int i = MAX_PLAYERS - 1; i >= 0; i--)
+	int i = noOfPlayers - 1;
+	for (; i >= 0; i--)
 	{
-		namesArray[i];
+
 		if (t_aNewName == namesArray[i])
 		{
 			std::cout << "Assign " << t_aNewName << " a new health value: ";
 			std::cin >> healthArray[i];
-			return i;
+			break;
 		}
 		if (i == 0)
 		{
-			return -1;
+			i = -1;
 		}
 	}
+	return i;
 }
